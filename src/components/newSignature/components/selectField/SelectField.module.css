@@ -1,0 +1,27 @@
+.span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.select {
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+    color: #111;
+    outline: none;
+    transition: 0.2s;
+}
+
+.select:focus {
+    border-color: #b30000;
+    box-shadow: 0 0 0 2px rgba(179, 0, 0, 0.15);
+}
