@@ -21,6 +21,11 @@ const NewSignature = ({onClose, onSignatureAdded}: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if(dayAlert === null) {
+      setMsgError("Selecione uma data de alerta")
+      return
+    }
+
     const signature: CreateSignature = {
       name,
       dueDate,
