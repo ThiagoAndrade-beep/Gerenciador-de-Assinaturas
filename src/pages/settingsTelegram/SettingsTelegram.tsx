@@ -34,6 +34,11 @@ const SettingsTelegram = () => {
   }, [])
 
   async function connect() {
+    if (!token) {
+      navigate("/unauthorized")
+      return
+    }
+
     const response = await connectTelegram(token)
     setCode(response.code)
     setShowSuccesMessage(true)
