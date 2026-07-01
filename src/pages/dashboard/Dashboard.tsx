@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from "./Dashboard.module.css"
 import { useNavigate } from 'react-router-dom'
 import { getDashboard } from '../../services/GetDashboard.service'

@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from "./ResetPassword.module.css"
 import { FaTools } from "react-icons/fa";
 import { Link } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from "./SettingsTelegram.module.css"
 import AppHeader from '../../components/appHeader/AppHeader'
 import type { DashboardUser } from '../../types/User'
