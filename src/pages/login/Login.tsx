@@ -31,7 +31,7 @@ const Login = () => {
         localStorage.setItem("id", idUser)
         navigate("settings")
       } catch (error) {
-        toast.error("Erro ao registrar usuário")
+        toast.error("Erro ao tentar realizar o login")
       }finally {
         setLoading(false)
       }

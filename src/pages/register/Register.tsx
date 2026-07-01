@@ -27,7 +27,7 @@ const Login = () => {
             console.log(responseData)
             toast.success(responseData.msg)
         } catch (error) {
-            toast.error("Erro ao tentar fazer login")
+            toast.error("Erro ao tentar registrar usuário")
         } finally {
           setLoading(false)
         }
