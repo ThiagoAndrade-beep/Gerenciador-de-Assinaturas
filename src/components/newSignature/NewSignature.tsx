@@ -79,7 +79,7 @@ const NewSignature = ({onClose, onSignatureAdded}: Props) => {
             { value: '7', label: '7 dia antes' },
             { value: '14', label: '14 dia antes' },
           ]}
-          value={dayAlert}
+          value={dayAlert ?? undefined}
           onChange={(e) => setDayAlert(Number(e.target.value))}
         />
         {msgError && (<p className={styles.msgError}>{msgError}</p>)}
