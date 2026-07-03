@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/LoginUser.service';
 import type { LoginRequest } from '../../types/User';
 import { toast, ToastContainer } from 'react-toastify';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState<string>("")
@@ -16,25 +17,30 @@ const Login = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const navigate = useNavigate()
 
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      const user: LoginRequest = {
-        email,
-        password
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const user: LoginRequest = {
+      email,
+      password
+    }
+    try {
+      setLoading(true)
+      const responseData = await loginUser(user)
+      const token = responseData.token
+      const idUser = responseData.userId
+      localStorage.setItem("token", token)
+      localStorage.setItem("id", idUser)
+      navigate("settings")
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.msg ?? "Erro ao tentar se registrar")
       }
-      try {
-        setLoading(true)
-        const responseData = await loginUser(user)
-        const token = responseData.token
-        const idUser = responseData.userId
-        localStorage.setItem("token",token)
-        localStorage.setItem("id", idUser)
-        navigate("settings")
-      } catch (error) {
-        toast.error("Erro ao tentar realizar o login")
-      }finally {
-        setLoading(false)
+      else {
+        toast.error("Erro interno. Tente novamente")
       }
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -51,10 +57,10 @@ const Login = () => {
             <Input
               placeholder='seu@email.com'
               name='email'
-              icon={FiMail} 
+              icon={FiMail}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}  
-              />
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </label>
           <label>
             <div className={styles.labelPassword}>
@@ -71,7 +77,7 @@ const Login = () => {
             />
           </label>
           <Button type='submit'>
-              {loading ? "Entrando..." : "Entrar"}
+            {loading ? "Entrando..." : "Entrar"}
           </Button>
         </form>
         <p>

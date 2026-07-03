@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { registerUser } from '../../services/RegisterUser.service';
 import { ToastContainer, toast } from 'react-toastify';
 import type { RegisterRequest } from '../../types/User';
+import axios from 'axios';
 
 const Login = () => {
     const [email, setEmail] = useState<string>("")
@@ -26,8 +27,13 @@ const Login = () => {
             const responseData = await registerUser(user)
             console.log(responseData)
             toast.success(responseData.msg)
-        } catch (error) {
-            toast.error("Erro ao tentar registrar usuário")
+        } catch (error: unknown) {
+            if(axios.isAxiosError(error)) {
+              toast.error(error.response?.data?.msg ?? "Erro ao tentar se registrar")
+            }
+            else {
+              toast.error("Erro interno. Tente novamente")
+            }
         } finally {
           setLoading(false)
         }
